@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorization to Release Personal Information</title>
+</head>
+<body>
+    <h1>Authorization to Release Personal Information</h1>
+    <form>
+        <p>
+            I, <input type="text" name="clientName" placeholder="Your Name">, hereby authorize Biana Bochkur, PsyD to release records pertinent to services provided to me to:
+        </p>
+        <p>
+            Name of Person or Organization to which disclosure is made: <input type="text" name="disclosureName" placeholder="Name">
+        </p>
+        <p>
+            Address of Person or Organization to which disclosure is made: <input type="text" name="disclosureAddress" placeholder="Address">
+        </p>
+        <p>
+            The disclosure is required for the following purpose(s): <br>
+            <textarea name="disclosurePurpose" rows="4" cols="50" placeholder="Purpose(s)"></textarea>
+        </p>
+        <p>
+            And such disclosure shall be limited to the following types of information: <br>
+            <textarea name="disclosureInfo" rows="4" cols="50" placeholder="Information"></textarea>
+        </p>
+        <p>
+            This consent form is subject to revocation. My consent may be revoked at any time by written revocation. If no express revocation is made, this consent shall terminate in six months from the date of this authorization or upon termination of the services provided to me by Biana Bochkur, PsyD, whichever period of time is shorter.
+        </p>
+        <p>
+            Expiration Date: <input type="date" name="expirationDate">
+        </p>
+        <p>
+            Signature of Client: <input type="text" name="clientSignature" placeholder="Client's Signature" style="font-family: cursive;">
+        </p>
+        <p>
+            Date: <input type="date" name="signatureDate">
+        </p>
+        <p>
+            Signature of Parent or Guardian (if applicable): <input type="text" name="guardianSignature" placeholder="Parent or Guardian's Signature">
+        </p>
+    </form>
+</body>
+</html>
