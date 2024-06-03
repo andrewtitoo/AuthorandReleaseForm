@@ -7,39 +7,79 @@
 </head>
 <body>
     <h1>Authorization to Release Personal Information</h1>
-    <form>
+    <form method="POST" action="https://formspree.io/f/mvoejbdy">
+        <input type="hidden" name="_subject" value="New authorization submission">
         <p>
-            I, <input type="text" name="clientName" placeholder="Your Name">, hereby authorize Biana Bochkur, PsyD to release records pertinent to services provided to me to:
+            I, <input type="text" name="clientName" placeholder="Your Name" required>, hereby authorize Biana Bochkur, PsyD to release records pertinent to services provided to me to:
         </p>
         <p>
-            Name of Person or Organization to which disclosure is made: <input type="text" name="disclosureName" placeholder="Name">
+            Name of Person or Organization to which disclosure is made: <input type="text" name="disclosureName" placeholder="Name" required>
         </p>
         <p>
-            Address of Person or Organization to which disclosure is made: <input type="text" name="disclosureAddress" placeholder="Address">
+            Address of Person or Organization to which disclosure is made: <input type="text" name="disclosureAddress" placeholder="Address" required>
         </p>
         <p>
             The disclosure is required for the following purpose(s): <br>
-            <textarea name="disclosurePurpose" rows="4" cols="50" placeholder="Purpose(s)"></textarea>
+            <textarea name="disclosurePurpose" rows="4" cols="50" placeholder="Purpose(s)" required></textarea>
         </p>
         <p>
             And such disclosure shall be limited to the following types of information: <br>
-            <textarea name="disclosureInfo" rows="4" cols="50" placeholder="Information"></textarea>
+            <textarea name="disclosureInfo" rows="4" cols="50" placeholder="Information" required></textarea>
         </p>
         <p>
             This consent form is subject to revocation. My consent may be revoked at any time by written revocation. If no express revocation is made, this consent shall terminate in six months from the date of this authorization or upon termination of the services provided to me by Biana Bochkur, PsyD, whichever period of time is shorter.
         </p>
         <p>
-            Expiration Date: <input type="date" name="expirationDate">
+            Expiration Date: <input type="date" name="expirationDate" required>
         </p>
         <p>
-            Signature of Client: <input type="text" name="clientSignature" placeholder="Client's Signature" style="font-family: cursive;">
+            Signature of Client: <input type="text" name="clientSignature" placeholder="Client's Signature" style="font-family: cursive;" required>
         </p>
         <p>
-            Date: <input type="date" name="signatureDate">
+            Date: <input type="date" name="signatureDate" required>
         </p>
         <p>
             Signature of Parent or Guardian (if applicable): <input type="text" name="guardianSignature" placeholder="Parent or Guardian's Signature">
         </p>
+        
+        <div class="form-group">
+            <button type="submit">Submit</button>
+        </div>
     </form>
+
+    <div id="successMessage" style="display:none;">Your message has been sent successfully!</div>
+    <div id="errorMessage" style="display:none;">There was an error sending your message. Please try again.</div>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var form = event.target;
+
+            fetch(form.action, {
+                method: form.method,
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    document.getElementById("successMessage").style.display = "block";
+                    form.reset();
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            document.getElementById("errorMessage").innerText = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            document.getElementById("errorMessage").innerText = "There was an error sending your message. Please try again.";
+                        }
+                        document.getElementById("errorMessage").style.display = "block";
+                    })
+                }
+            }).catch(error => {
+                document.getElementById("errorMessage").innerText = "There was an error sending your message. Please try again.";
+                document.getElementById("errorMessage").style.display = "block";
+            });
+        });
+    </script>
 </body>
 </html>
